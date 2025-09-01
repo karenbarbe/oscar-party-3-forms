@@ -1,0 +1,76 @@
+<h1>Edit Movie #<%= @the_movie.id %></h1>
+
+<p>
+  <a href="/movies/<%= @the_movie.id %>" target="_blank">View Movie Details</a>
+</p>
+
+<form action="/backdoor/modify_movie/<%= @the_movie.id %>" method="post">
+  <div>
+    <label for="movie_title_box">Title</label>
+    <input type="text" id="movie_title_box" name="query_title" value="<%= @the_movie.title %>">
+  </div>
+
+  <div>
+    <label for="movie_year_box">Year</label>
+    <input type="number" id="movie_year_box" name="query_year" value="<%= @the_movie.year %>">
+  </div>
+
+  <div>
+    <label for="movie_duration">Duration</label>
+    <input type="number" id="movie_duration" name="query_duration" value="<%= @the_movie.duration %>">
+  </div>
+
+  <div>
+    <label for="movie_description">Description</label>
+    <textarea id="movie_description" name="query_description" rows="3"><%= @the_movie.description %></textarea>
+  </div>
+
+  <div>
+    <label for="movie_image">Image URL</label>
+    <input type="text" id="movie_image" name="query_image" value="<%= @the_movie.image %>">
+  </div>
+
+  <div>
+  <label for="movie_director_box">Director</label>
+  <select id="movie_director_box" name="query_director_id">
+    <option value="<%= @the_movie_director.id %>"><%= @the_movie_director.first_name %> <%= @the_movie_director.last_name %>
+</option>
+    <option value="">Select a director...</option>
+    <% @all_other_directors.all.order({ :last_name => :asc }).each do |a_director| %>
+      <option value="<%= a_director.id %>">
+        <%= a_director.first_name %> <%= a_director.last_name %>
+      </option>
+    <% end %>
+  </select>
+</div>
+
+<div>
+  <label for="movie_released_on_box">Released On</label>
+  <input type="date" id="movie_released_on_box" name="query_released_on" value="<%= @the_movie.released_on %>"
+>
+</div>
+
+<div>
+  <label for="movie_oscar_cohort_box">Oscar Cohort</label>
+  <input type="number" id="movie_oscar_cohort_box" name="query_oscar_cohort" value="<%= @the_movie.oscar_cohort %>"
+>
+</div>
+
+<fieldset>
+  <legend>Result</legend>
+
+  <input type="radio" id="movie_result_nominated_box" name="query_result" value="nominated" checked>
+  <label for="movie_result_nominated_box">Nominated</label>
+
+  <input type="radio" id="movie_result_won_box" name="query_result" value="won">
+  <label for="movie_result_won_box">Won</label>
+
+  <input type="radio" id="movie_result_did_not_win_box" name="query_result" value="did not win">
+  <label for="movie_result_did_not_win_box">Did not win</label>
+</fieldset>
+
+
+  <button type="submit">
+    Update Movie
+  </button>
+</form>
