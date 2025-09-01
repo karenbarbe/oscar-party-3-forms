@@ -1,0 +1,53 @@
+<nav>
+  <ul>
+    <li><a href="/backdoor/movies">Manage Movies</a></li>
+  </ul>
+</nav>
+
+<nav aria-label="breadcrumb">
+  <ul>
+    <li><a href="/backdoor">Admin</a></li>
+    <li>Manage movies</li>
+  </ul>
+</nav>
+
+<article>
+  <header>
+    <h1>Movies</h1>
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Result</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @list_of_movies.each do |a_movie| %>
+        <tr>
+          <td>
+            <%= a_movie.title %>
+          </td>
+          <td>
+            <%= a_movie.year %>
+          </td>
+          <td>
+            <%= a_movie.result %>
+          </td>
+          <td>
+            <a href="/backdoor/movies/<%= a_movie.id %>">Edit</a>
+            |
+            <a href="/backdoor/delete_movie/<%= a_movie.id %>">
+              Delete
+            </a>
+          </td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</article>
